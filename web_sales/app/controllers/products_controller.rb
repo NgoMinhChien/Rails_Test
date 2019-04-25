@@ -1,10 +1,9 @@
 class ProductsController < ApplicationController
 	before_action :set_user, only: [:show, :edit, :update]
-	# before_action :admin,		 only: [:logged_in]
-	before_action :logged_in,		 only: [:edit, :destroy]
+	before_action :logged_in,		 only: [:create, :edit, :destroy]
 
 	def new
-		@products = Product.new
+		@product = Product.new
 	end
 
 	def index
@@ -31,7 +30,13 @@ class ProductsController < ApplicationController
 	end
 
 	def create
-		
+		@product = Product.new(product_params)
+		if @product.save
+			flash[:success] = "Create a product success!"
+			redirect_to products_path
+		else
+			render "new"
+		end
 	end
 
 	private
@@ -40,7 +45,8 @@ class ProductsController < ApplicationController
 		end
 
 		def product_params
-			params.require(:product).permit(:category_id, :name, :price, :description)
+			params.require(:product).permit(:category_id, :name, 
+				:price, :description, :image)
 		end
 
 		def admin

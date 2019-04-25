@@ -1,0 +1,31 @@
+<%= form_for @product do |f| %>
+	<div>
+		<%= f.label 			"Category" %>
+		<%= f.text_field 	:category_id, class: "form-control", required: true %>
+	</div>
+	<div>
+		<%= f.label 			:name %>
+		<%= f.text_field 	:name, class: "form-control", required: true %>
+	</div>
+	<div>
+		<%= f.label 			:price %>
+		<%= f.text_field 	:price, class: "form-control", required: true %>
+	</div>
+	<div>
+		<%= f.label 			:description %>
+		<%= f.text_field 	:description, class: "form-control" %>
+	</div>
+	<div>
+		<%= f.label 			"Image (URI)" %>
+		<%= f.text_field 	:image, class: "form-control" %>
+	</div>
+
+	<div class="image">
+		<img src="<%= @product.image %>">
+	</div>
+
+	<div>
+		<%= f.submit yield(:button_text), class: "btn btn-primary" %>
+	</div>
+
+<% end %>
