@@ -6,9 +6,16 @@
 					<img src="<%= product.image %>">
 				</div>
 				<div class="content">
-					<a class="header">
-						<%= link_to product.name , product %>
-					</a>
+						<% if !current_user.nil? && current_user.admin? %>
+							<a class="header">
+								<%= link_to product.name , product %>
+							</a>
+						<% else %>
+							<a class="header">
+								<%= link_to product.name , order_path %>
+							</a>
+						<% end %>
+					
 					<div class="description">
 						<%= product.description %>
 					</div>

@@ -1,3 +1,23 @@
 <%= provide(:title, @product.name) %>
 
 <%= render @product %>
+
+<%= form_for :order do |f| %>
+	<div>
+		<%= f.label 			:product_id %>
+	</div>
+	<div>
+		<%= f.label 			:product_id %>
+	</div>
+	<div>
+		<%= f.label 			:product_id %>
+	</div>
+	<div>
+		<%= f.label 			:product_id %>
+	</div>
+	<div>
+		<%= f.label 			:product_id %>
+	</div>
+<% end %>
+
+<%= render  "orders/order" %>
