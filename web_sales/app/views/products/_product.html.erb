@@ -1,0 +1,25 @@
+<div class="container">
+	<div class="row">
+		<div class="col-md-4">
+			<div class="ui card">
+				<div class="image">
+					<img src="<%= product.image %>">
+				</div>
+				<div class="content">
+					<a class="header">
+						<%= link_to product.name , product %>
+					</a>
+					<div class="description">
+						<%= product.description %>
+					</div>
+				</div>
+				<div class="extra content">
+					<a>
+						<i class="user icon"></i>
+						<%= product.price %> VND
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
