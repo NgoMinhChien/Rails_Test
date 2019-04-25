@@ -1,0 +1,30 @@
+<%= provide(:title, "Edit product") %>
+
+<%= form_for @product do |f| %>
+	<div>
+		<%= f.label 			"Category" %>
+		<%= f.text_field 	:category_id, class: "form-control", required: true %>
+	</div>
+	<div>
+		<%= f.label 			:name %>
+		<%= f.text_field 	:name, class: "form-control", required: true %>
+	</div>
+	<div>
+		<%= f.label 			:price %>
+		<%= f.text_field 	:price, class: "form-control", required: true %>
+	</div>
+	<div>
+		<%= f.label 			:description %>
+		<%= f.text_field 	:description, class: "form-control" %>
+	</div>
+
+	<%= render  "products/form" %>
+	<div class="image">
+		<img src="<%= @product.image %>">
+	</div>
+
+	<div>
+		<%= f.submit "Update product", class: "btn btn-primary" %>
+	</div>
+
+<% end %>

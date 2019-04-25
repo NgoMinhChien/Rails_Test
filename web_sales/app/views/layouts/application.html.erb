@@ -21,9 +21,9 @@
     <p class="notice">
       <%= notice %>
     </p>
-    <!-- <p class="alert">
-      <%= alert %>
-    </p> -->
+    <% flash.each do |message_type, message| %>
+      <div class="alert alert-<%= message_type %>"><%= message %></div>
+    <% end %>
     <%= render "layouts/header" %>
   </div>
   <div class="container">
