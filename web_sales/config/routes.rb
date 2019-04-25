@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     delete  "/signout", to: "devise/sessions#destroy"
   end
 
-  root "static_pages#home"
+  root      "category#index"
+  resources :category,  only: [:index, :show]
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
