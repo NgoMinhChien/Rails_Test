@@ -2,10 +2,8 @@
 
 one:
   order: one
-  amount: 1
-  status: MyString
+  product: one
 
 two:
   order: two
-  amount: 1
-  status: MyString
+  product: two

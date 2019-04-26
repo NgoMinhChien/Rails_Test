@@ -5,8 +5,8 @@ class OrdersController < ApplicationController
 	end
 
 	def show
-		# @product = Product.find(params[:id])
-		@order	 = @product.orders
+		@order = current_user.orders.create
+		@order_details = @order.order_details.create(product_id: @product.id, qty: 2)
 	end
 
 	def create
