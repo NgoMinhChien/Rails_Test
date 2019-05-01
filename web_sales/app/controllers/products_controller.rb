@@ -1,6 +1,8 @@
 class ProductsController < ApplicationController
-	before_action :set_user, only: [:show, :edit, :update]
-	before_action :logged_in,		 only: [:create, :edit, :destroy]
+	before_action :set_product, 	only: [:show, :edit, :update]
+	before_action :logged_in,		 	only: [:create, :edit, :destroy]
+	# before_action :current_order_status, only: [:show]
+	# before_action :current_order, only: [:show]
 
 	def new
 		@product = Product.new
@@ -11,8 +13,6 @@ class ProductsController < ApplicationController
 	end
 
 	def show
-		@order = current_user.orders.create
-		@order_details = @order.order_details.create(product_id: @product.id, qty: 2)
 	end
 
 	def update
@@ -41,7 +41,7 @@ class ProductsController < ApplicationController
 	end
 
 	private
-		def set_user
+		def set_product
 			@product = Product.find(params[:id])
 		end
 
@@ -51,7 +51,7 @@ class ProductsController < ApplicationController
 		end
 
 		def admin
-				redirect_to root_path if !current_user.admin?
+			redirect_to root_path if !current_user.admin?
 		end
 
 		def logged_in
@@ -61,4 +61,5 @@ class ProductsController < ApplicationController
 				admin
 			end
 		end
+		
 end
