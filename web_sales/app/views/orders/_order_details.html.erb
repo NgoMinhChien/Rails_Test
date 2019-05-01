@@ -1,0 +1,53 @@
+<!-- <div class="container">
+	<div class="row">
+		<div class="col-md-4">
+			<div class="ui card">
+				<div class="image">
+					<img src="<%= @order_details.find(order_detail.id).product.image %>">
+				</div>
+				<div class="content">
+					<a class="header">
+						<%= link_to @order_details.find(order_detail.id).product.name %>
+					</a>
+					<div class="description">
+						<%= @order_details.find(order_detail.id).product.description %>
+					</div>
+				</div>
+				<div class="extra content">
+					<a>
+						<i class="user icon"></i>
+						<%= @order_details.find(order_detail.id).product.price %> VND
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div> -->
+
+<% @products.each do |product| %>
+<div class="container">
+	<div class="row">
+		<div class="col-md-4">
+			<div class="ui card">
+				<div class="image">
+					<img src="<%= product.image %>">
+				</div>
+				<div class="content">
+					<a class="header">
+						<%= link_to product.name %>
+					</a>
+					<div class="description">
+						<%= product.description %>
+					</div>
+				</div>
+				<div class="extra content">
+					<a>
+						<i class="user icon"></i>
+						<%= product.price %> VND
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<% end %>

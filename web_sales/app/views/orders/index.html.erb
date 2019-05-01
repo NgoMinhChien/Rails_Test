@@ -1,0 +1,54 @@
+<%= provide(:title, "Order index") %>
+<%= link_to "THANH TOAN", "#", class: "btn btn-primary" %>
+<% if @order_details.nil? %>
+	<p>Chua co san pham nao trong gio</p>
+<% else %>
+<h2>
+		<div>
+			Tổng so san pham
+			<%= link_to  @order_details.count, "#" %>
+		</div>
+		<div>
+			Tổng so tien thanh toan
+			<%= link_to  @prices.sum, "#" %>
+		</div>
+	</h2>
+	<% @order_details.each do |order_detail| %>
+		<p>
+			<div>
+				Số lượng
+				<%= link_to(@order_details.find(order_detail.id).qty) %>
+			</div>
+			<div>
+				Tổng tiền
+				<%= link_to(@order_details.find(order_detail.id).product.price *
+								@order_details.find(order_detail.id).qty) %>
+			</div>
+			<div class="container">
+				<div class="row">
+					<div class="col-md-4">
+						<div class="ui card">
+							<div class="image">
+								<img src="<%= @order_details.find(order_detail.id).product.image %>">
+							</div>
+							<div class="content">
+								<a class="header">
+									<%= link_to @order_details.find(order_detail.id).product.name %>
+								</a>
+								<div class="description">
+									<%= @order_details.find(order_detail.id).product.description %>
+								</div>
+							</div>
+							<div class="extra content">
+								<a>
+									<i class="user icon"></i>
+									<%= @order_details.find(order_detail.id).product.price %> VND
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</p>
+	<% end %>
+<% end %>
