@@ -11,6 +11,13 @@ class OrderDetailsController < ApplicationController
 		flash[:success] = "Đã thêm sản phẩm vào giỏ hàng"
 		redirect_back(fallback_location: root_path)
 	end
+
+	def destroy
+		@order = current_user.orders.find_by(status: "Pending")
+		@order.order_details.find(params[:id]).destroy
+		flash[:success] = "Delete success"
+		redirect_back(fallback_location: root_path)
+	end
 	
 	private
 		def set_user
@@ -36,4 +43,5 @@ class OrderDetailsController < ApplicationController
 			@order = current_user.orders.create(status: "Pending")
 			session[:order_id] = @order.id
 		end
+		
 end

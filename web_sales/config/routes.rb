@@ -12,8 +12,8 @@ Rails.application.routes.draw do
 
   resources  :categories,   only: [:index, :show]
   resources  :products,     only: [:create, :index, :edit, :update, :show, :destroy]
-  resources  :orders,       only: [:create, :index, :edit, :update, :show]
-  resources  :order_details,       only: [:create, :index, :edit, :update, :show]
+  resources  :orders,       only: [:create, :index, :edit, :update, :show, :destroy]
+  resources  :order_details,       only: [:create, :index, :edit, :update, :show, :destroy]
   # For details on the DSL available within this file, 
   # see http://guides.rubyonrails.org/routing.html
 end
