@@ -4,26 +4,42 @@
 <% else %>
 <%= link_to "THANH TOAN", transactions_path, method: :post, class: "btn btn-primary" %>
 <h2>
-		<div>
-			Tổng so san pham
-			<%= link_to  @order_details.count, "#" %>
-		</div>
-		<div>
-			Tổng so tien thanh toan
-			<%= link_to  @prices.sum, "#" %>
-		</div>
-	</h2>
+	<div>
+		Product total
+		<%= link_to  @order_details.count, "#" %>
+	</div>
+	<div>
+		Payment total
+		<%= link_to  @prices.sum, "#" %>
+	</div>
+</h2>
 	<% @order_details.each do |order_detail| %>
 		<p>
-			<div>
-				Số lượng
+			<%= form_for(:order_details, url: order_detail_path(@order_details), method: :patch) do |f| %>
+				<div>
+					<%= f.label 			"Amount" %>
+					<%= f.text_field 	:qty, required: true, value: @order_details.find(order_detail.id).qty %>
+				</div>
+				<div>
+					Payment
+					<%= link_to(@order_details.find(order_detail.id).product.price *
+						@order_details.find(order_detail.id).qty)
+					%>
+				</div>
+				<div>
+					<%= f.submit "Update", class:"btn btn-primary" %>
+				</div>
+			<% end %>
+			<!-- <div>
+				Amount
 				<%= link_to(@order_details.find(order_detail.id).qty) %>
-			</div>
-			<div>
-				Tổng tiền
+			</div> -->
+			<!-- <div>
+				Payment
 				<%= link_to(@order_details.find(order_detail.id).product.price *
-								@order_details.find(order_detail.id).qty) %>
-			</div>
+					@order_details.find(order_detail.id).qty) 
+				%>
+			</div> -->
 			<div class="container">
 				<div class="row">
 					<div class="col-md-4">

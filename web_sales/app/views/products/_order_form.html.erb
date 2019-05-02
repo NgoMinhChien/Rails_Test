@@ -1,13 +1,13 @@
-<%= form_for @order_details do |f| %>
+
+
+<%= form_for(:order_details, 
+	url: order_details_path(order_details: { product_id: product.id})) do |f| 
+%>
 	<div>
 		<%= f.label 			"Số lượng:" %>
-		<%= f.text_field 	:qty, class: "form-control", required: true,
-			value: "1" 
-		%>
+		<%= f.text_field 	:qty, class: "form-control", required: true, value: "1" %>
 	</div>
 	<div>
-		<%= f.submit "CHỌN MUA",
-			method: "post", class: "btn btn-primary" 
-		%>
+		<%= f.submit "THÊM VÀO GIỎ HÀNG", class: "btn btn-primary"  %>
 	</div>
 <% end %>
