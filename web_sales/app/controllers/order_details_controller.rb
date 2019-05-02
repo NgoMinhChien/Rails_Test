@@ -1,5 +1,5 @@
 class OrderDetailsController < ApplicationController
-	before_action :set_user, 			only: [:show, :edit, :update, :create]
+	before_action :set_user, 			only: [:show, :edit, :update]
 	before_action :current_order, only: [:show, :create]
 
 	def show
@@ -7,7 +7,8 @@ class OrderDetailsController < ApplicationController
 	end
 
 	def create
-		@order_details = current_order.order_details.create(product_id: 2, qty: 1)
+		@order_details = current_order.order_details.create(product_params)
+		# @order_details = current_order.order_details.create(product_id: @product.id, qty: 1)
 		flash[:success] = "Đã thêm sản phẩm vào giỏ hàng"
 		redirect_back(fallback_location: root_path)
 	end
@@ -42,6 +43,10 @@ class OrderDetailsController < ApplicationController
 		def create_order
 			@order = current_user.orders.create(status: "Pending")
 			session[:order_id] = @order.id
+		end
+
+		def product_params
+			params.require(:order_details).permit(:product_id, :qty)
 		end
 		
 end

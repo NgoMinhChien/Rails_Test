@@ -20,8 +20,9 @@
 					</a>
 				</div>
 				<% if current_user.nil? || !current_user.admin? %>
-					<%= link_to "THÊM VÀO GIỎ HÀNG", order_details_path(product.id), method: :post,
-					 class: "btn btn-primary" 
+					<%= link_to "THÊM VÀO GIỎ HÀNG", 
+						order_details_path(order_details: { product_id: product.id, qty: 1 }), 
+						method: :post, class: "btn btn-primary" 
 					%>
 				<% end %>
 			</div>

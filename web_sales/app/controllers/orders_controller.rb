@@ -12,6 +12,7 @@ class OrdersController < ApplicationController
 				@products.push(order_detail.product)
 				@prices.push(order_detail.product.price * order_detail.qty)
 			end
+			$total_cart = @prices.sum
 		end
 	end
 
