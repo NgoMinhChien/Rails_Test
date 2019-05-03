@@ -1,11 +1,3 @@
 <%= provide(:title, @product.name) %>
 
 <%= render @product %>
-
-<% if current_user.nil? %>
-	<%= render  	"products/select" %>
-<% else %>
-	<% if !current_user.admin? %>
-		<%= render  "products/select" %>
-	<% end %>
-<% end %>

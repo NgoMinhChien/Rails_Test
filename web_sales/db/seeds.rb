@@ -7,6 +7,13 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 User.create!(
+	username: 							"Test_1",
+	email: 									"test-1@gmail.com",
+	password: 							"123456",
+	password_confirmation: 	"123456",
+)
+
+User.create!(
 	username: 							"Test",
 	email: 									"test@gmail.com",
 	password: 							"123456",
@@ -39,8 +46,6 @@ end
 50.times do
 	category_id = rand(1..5)
 	price 			= rand(3..7) * 10_000
-	view 				= rand(1..10) * 10
-	rating			= rand(1..5)
 
 	name_1 			= "Ba Ngày Hạnh Phúc"
 	name_2 			= "Có Những Ngày Hạnh Phúc Chừa Tôi Ra"
@@ -60,7 +65,5 @@ Product.create!(
 	price: 				price,
 	description:  "Thật vô vọng khi thích một người không còn trên thế gian này.",
 	image: 				picture,
-	view:					view,
-	rating:				rating
 )
 end

@@ -12,4 +12,17 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit :sign_up, keys: added_attrs
     devise_parameter_sanitizer.permit :account_update, keys: added_attrs
   end
+
+  private
+    def logged_in_user
+      unless logged_in?
+        flash[:danger] = "Please log in."
+        redirect_to signin_path
+      end
+    end
+
+    def logged_in?
+      !current_user.nil?
+    end
+    
 end

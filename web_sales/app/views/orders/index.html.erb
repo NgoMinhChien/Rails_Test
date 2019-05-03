@@ -1,0 +1,74 @@
+<%= provide(:title, "Order index") %>
+<% if @order_details.nil? %>
+<div>Chua co san pham nao trong gio</div>
+<% else %>
+<%= link_to "THANH TOAN", transactions_path, method: :post, class: "btn btn-primary" %>
+<h2>
+	<div>
+		Product total
+		<%= link_to  @order_details.count, "#" %>
+	</div>
+	<div>
+		Payment total
+		<%= link_to  @prices.sum, "#" %>
+	</div>
+</h2>
+<table>
+
+	<tbody>
+		<% @order_details.each do |order_detail| %>
+		<tr>
+			<td>
+				<%= form_for(:order_details, 
+					url: order_detail_path(@order_details), 
+					method: :patch) do |f| %>
+				<div>
+					<%= f.label 			"Amount" %>
+					<%= f.text_field 	:qty, required: true, value: @order_details.find(order_detail.id).qty %>
+				</div>
+				<div>
+					Payment
+					<%= link_to(@order_details.find(order_detail.id).product.price *
+									@order_details.find(order_detail.id).qty)
+								%>
+				</div>
+				<div>
+					<%= f.submit "Update", class:"btn btn-primary" %>
+				</div>
+				<% end %>
+			</td>
+			<td>
+				<div class="container">
+					<div class="row">
+						<div class="col-md-4">
+							<div class="ui card">
+								<%= link_to  "Delete", order_detail, method: :delete,
+									remote: true, class: "delete_post" %>
+								<div class="image">
+									<img src="<%= @order_details.find(order_detail.id).product.image %>">
+								</div>
+								<div class="content">
+									<a class="header">
+										<%= link_to @order_details.find(order_detail.id).product.name %>
+									</a>
+									<div class="description">
+										<%= @order_details.find(order_detail.id).product.description %>
+									</div>
+								</div>
+								<div class="extra content">
+									<a>
+										<i class="user icon"></i>
+										<%= @order_details.find(order_detail.id).product.price %> VND
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</td>
+		</tr>
+		<% end %>
+	</tbody>
+</table>
+
+<% end %>

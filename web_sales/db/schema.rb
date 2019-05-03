@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_25_092440) do
+ActiveRecord::Schema.define(version: 2019_04_26_064237) do
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
@@ -19,22 +19,22 @@ ActiveRecord::Schema.define(version: 2019_04_25_092440) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "orders", force: :cascade do |t|
+  create_table "order_details", force: :cascade do |t|
+    t.integer "order_id"
     t.integer "product_id"
-    t.integer "price"
     t.integer "qty"
-    t.integer "amount"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_order_details_on_order_id"
+    t.index ["product_id"], name: "index_order_details_on_product_id"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.integer "user_id"
     t.string "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "category_id"
-    t.integer "transaction_id"
-    t.index ["category_id", "created_at"], name: "index_orders_on_category_id_and_created_at"
-    t.index ["category_id"], name: "index_orders_on_category_id"
-    t.index ["product_id", "created_at"], name: "index_orders_on_product_id_and_created_at"
-    t.index ["product_id"], name: "index_orders_on_product_id"
-    t.index ["transaction_id", "created_at"], name: "index_orders_on_transaction_id_and_created_at"
-    t.index ["transaction_id"], name: "index_orders_on_transaction_id"
+    t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
   create_table "products", force: :cascade do |t|
@@ -45,25 +45,18 @@ ActiveRecord::Schema.define(version: 2019_04_25_092440) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "image"
-    t.integer "view"
-    t.decimal "rating"
     t.index ["category_id", nil], name: "index_products_on_category_id_and_create_at"
     t.index ["category_id"], name: "index_products_on_category_id"
   end
 
   create_table "transactions", force: :cascade do |t|
-    t.integer "user_id"
-    t.string "status"
+    t.integer "order_id"
     t.integer "amount"
-    t.string "message"
+    t.string "status"
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "user_name"
-    t.string "user_email"
-    t.string "user_phone"
-    t.string "payment"
-    t.string "payment_info"
-    t.index ["user_id", nil], name: "index_transactions_on_user_id_and_create_at"
+    t.index ["order_id"], name: "index_transactions_on_order_id"
     t.index ["user_id"], name: "index_transactions_on_user_id"
   end
 
