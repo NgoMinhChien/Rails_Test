@@ -1,5 +1,5 @@
 class OrderDetailsController < ApplicationController
-	before_action :current_order, 	only: [:show, :create, :update]
+	before_action :current_order, 	only: [:create, :update]
 	before_action :check_product, 	only: [:create, :update]
 
 	def show
@@ -47,24 +47,33 @@ class OrderDetailsController < ApplicationController
 	
 	private
 
+		# def current_order
+		# 	if session[:order_id].nil?
+		# 		create_order
+		# 	else
+		# 		@order = Order.find(session[:order_id])
+		# 		if @order
+		# 			if @order.status != "Pending"
+		# 				create_order
+		# 			else
+		# 				@order
+		# 			end
+		# 		end
+		# 	end
+		# end
+
 		def current_order
-			if session[:order_id].nil?
+			@order = current_user.orders.find_by(status: "Pending")
+			if @order.nil?
 				create_order
 			else
-				@order = Order.find(session[:order_id])
-				if @order
-					if @order.status != "Pending"
-						create_order
-					else
-						@order
-					end
-				end
+				@order
 			end
 		end
 
 		def create_order
 			@order = current_user.orders.create(status: "Pending")
-			session[:order_id] = @order.id
+			# session[:order_id] = @order.id
 		end
 
 		def product_params

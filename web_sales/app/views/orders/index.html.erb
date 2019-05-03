@@ -15,7 +15,10 @@
 </h2>
 	<% @order_details.each do |order_detail| %>
 		<p>
-			<%= form_for(:order_details, url: order_detail_path(@order_details), method: :patch) do |f| %>
+			<%= form_for(:order_details, 
+				url: order_detail_path(@order_details), 
+				method: :patch) do |f| 
+			%>
 				<div>
 					<%= f.label 			"Amount" %>
 					<%= f.text_field 	:qty, required: true, value: @order_details.find(order_detail.id).qty %>

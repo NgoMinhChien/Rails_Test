@@ -6,7 +6,7 @@ class OrdersController < ApplicationController
 		unless @order.nil?
 			@order_details 	= @order.order_details
 			
-			@products = Array.new
+			@products 	= Array.new
 			@prices 		= Array.new
 			@order_details.each do |order_detail|
 				@products.push(order_detail.product)
