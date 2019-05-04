@@ -27,7 +27,7 @@
 						<%= f.text_field 	:qty, class: "form-control", required: true, value: "1" %>
 					</div>
 					<div>
-						<%= f.submit "THÊM VÀO GIỎ HÀNG", class: "btn btn-primary"  %>
+						<%= f.submit "THÊM VÀO GIỎ HÀNG", class: "btn btn-primary", remote: true %>
 						<% end %>
 					</div>
 				<% end %>

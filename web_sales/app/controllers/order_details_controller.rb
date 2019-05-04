@@ -31,11 +31,11 @@ class OrderDetailsController < ApplicationController
 
 	def destroy
 		@order = current_user.orders.find_by(status: "Pending")
-		@order.order_details.find(params[:id]).destroy
+		# @order.order_details.find(params[:id]).destroy
 		respond_to do |format|
-			format.html { redirect_to orders_path, notice: "Deleted success." }
+			format.html { redirect_to order_path, notice: "Deleted success." }
 			format.json { head :no_content }
-      format.js   { render layout: false }
+			format.js   { render layout: false }
 		end
 		# @order = current_user.orders.find_by(status: "Pending")
 		# @order.order_details.find(params[:id]).destroy

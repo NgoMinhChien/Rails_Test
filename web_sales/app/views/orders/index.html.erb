@@ -17,7 +17,7 @@
 
 	<tbody>
 		<% @order_details.each do |order_detail| %>
-		<tr>
+		<tr id="_tr_product">
 			<td>
 				<%= form_for(:order_details, 
 					url: order_detail_path(@order_details), 
@@ -29,15 +29,14 @@
 				<div>
 					Payment
 					<%= link_to(@order_details.find(order_detail.id).product.price *
-									@order_details.find(order_detail.id).qty)
-								%>
+						@order_details.find(order_detail.id).qty)%>
 				</div>
 				<div>
-					<%= f.submit "Update", class:"btn btn-primary" %>
+					<%= f.submit "Update", class:"btn btn-primary" s%>
 				</div>
 				<% end %>
-			</td>
-			<td>
+			<!-- </td>
+			<td> -->
 				<div class="container">
 					<div class="row">
 						<div class="col-md-4">
