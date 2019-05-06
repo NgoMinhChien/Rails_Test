@@ -40,9 +40,17 @@ class OrderDetailsController < ApplicationController
 
 	def destroy
 		@order = current_user.orders.find_by(status: "Pending")
-		@order.order_details.find(params[:id]).destroy
-		flash[:success] = "Delete success"
-		redirect_back(fallback_location: root_path)
+		order_detail = @order.order_details.find(params[:id])
+		respond_to do |format|
+			if order_detail.destroy
+				format.html {redirect_to order_details_url, notice: 'Post was successfully destroyed.'}
+        format.json { render json: @order_details.to_json }
+        format.js
+			else
+				format.json { render json: @order_details.to_json }
+        format.js
+			end
+		end
 	end
 	
 	private
