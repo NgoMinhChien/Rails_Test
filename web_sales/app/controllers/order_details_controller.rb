@@ -1,13 +1,13 @@
 class OrderDetailsController < ApplicationController
 	before_action :current_order, 	only: [:create, :update]
-	before_action :check_product, 	only: [:create, :update]
+	before_action :current_order_detail, 	only: [:create, :update]
 
 	def show
 		
 	end
 
 	def update
-		if check_product.update_attributes(qty_params)
+		if current_order_detail.update_attributes(qty_params)
 			flash[:success] = "Update to qty of cart success"
 			redirect_back(fallback_location: root_path)
 		else
@@ -17,7 +17,7 @@ class OrderDetailsController < ApplicationController
 	end
 
 	def create
-		if check_product.nil?
+		if current_order_detail.nil?
 			@order_details = current_order.order_details.create(product_params)
 			if @order_details.save
 				flash[:success] = "Add to cart success"
@@ -28,7 +28,7 @@ class OrderDetailsController < ApplicationController
 			end
 		else
 			total = old_qty + qty_new
-			if check_product.update_attributes(qty: total)
+			if current_order_detail.update_attributes(qty: total)
 				flash[:success] = "Update to qty of cart success"
 				redirect_back(fallback_location: root_path)
 			else
@@ -47,21 +47,6 @@ class OrderDetailsController < ApplicationController
 	
 	private
 
-		# def current_order
-		# 	if session[:order_id].nil?
-		# 		create_order
-		# 	else
-		# 		@order = Order.find(session[:order_id])
-		# 		if @order
-		# 			if @order.status != "Pending"
-		# 				create_order
-		# 			else
-		# 				@order
-		# 			end
-		# 		end
-		# 	end
-		# end
-
 		def current_order
 			@order = current_user.orders.find_by(status: "Pending")
 			if @order.nil?
@@ -73,7 +58,6 @@ class OrderDetailsController < ApplicationController
 
 		def create_order
 			@order = current_user.orders.create(status: "Pending")
-			# session[:order_id] = @order.id
 		end
 
 		def product_params
@@ -88,12 +72,12 @@ class OrderDetailsController < ApplicationController
 			params.require(:order_details).permit(:product_id)
 		end
 
-		def check_product
+		def current_order_detail
 			current_order.order_details.find_by(product_id_params)
 		end
 
 		def old_qty
-			check_product.qty
+			current_order_detail.qty
 		end
 
 		def qty_new
