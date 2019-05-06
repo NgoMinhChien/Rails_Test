@@ -18,7 +18,7 @@ class OrderDetailsController < ApplicationController
 
 	def create
 		if current_order_detail.nil?
-			@order_details = current_order.order_details.create(product_params)
+			@order_details = current_order.order_details.new(product_params)
 			if @order_details.save
 				flash[:success] = "Add to cart success"
 				redirect_back(fallback_location: root_path)
@@ -38,12 +38,37 @@ class OrderDetailsController < ApplicationController
 		end
 	end
 
+	# def create
+	# 	respond_to do |format|
+	# 		if current_order_detail.nil?
+	# 			@order_details = current_order.order_details.new(product_params)
+	# 			if @order_details.save
+	# 				format.html {	render category_url(1), notice: "Add to cart success" }
+	# 				format.json { head :no_content }
+	# 				format.js
+	# 			else
+	# 				format.json { head :no_content }
+	# 				format.js
+	# 			end
+	# 		else
+	# 			total = old_qty + qty_new
+	# 			if current_order_detail.update_attributes(qty: total)
+	# 				flash[:success] = "Update to qty of cart success"
+	# 				redirect_back(fallback_location: root_path)
+	# 			else
+	# 				flash[:danger] 	= "Update cart fail"
+	# 				redirect_back(fallback_location: root_path)
+	# 			end
+	# 		end
+	# 	end
+	# end
+
 	def destroy
 		@order = current_user.orders.find_by(status: "Pending")
 		order_detail = @order.order_details.find(params[:id])
 		respond_to do |format|
 			if order_detail.destroy
-				format.html {redirect_to order_details_url, notice: 'Post was successfully destroyed.'}
+				format.html { redirect_to order_details_url, notice: "Product was successfully destroyed." }
         format.json { render json: @order_details.to_json }
         format.js
 			else
