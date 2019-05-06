@@ -44,7 +44,8 @@ class OrderDetailsController < ApplicationController
 	# 			@order_details = current_order.order_details.new(product_params)
 	# 			if @order_details.save
 	# 				format.html {	render category_url(1), notice: "Add to cart success" }
-	# 				format.json { head :no_content }
+	# 				format.json { render :show, status: :created, location: @order_details }
+	# 				# format.json { head :no_content }
 	# 				format.js
 	# 			else
 	# 				format.json { head :no_content }

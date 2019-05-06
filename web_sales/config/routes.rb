@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
   get        "/new_product", to: "products#new"
   root       "categories#index"
+  get        "/home",        to: "static_pages#home"
 
   resources  :categories,     only: [:index, :show]
   resources  :products,       only: [:create, :index, :edit, :update, :show, :destroy]
